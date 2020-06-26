@@ -1,11 +1,12 @@
 import { AppComponent } from './app.component';
-import { AppReducer } from './store/reducers/app.reducer';
 import { AppRoutingModule } from './app-routing.module';
+import { AppState } from './store/reducers/app.reducer';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
+import { TodoFilterComponent } from './components/todo-filter/todo-filter.component';
 import { TodoItemComponent } from './components/todo-item/todo-item.component';
 import { TodosComponent } from './components/todos/todos.component';
 
@@ -14,12 +15,13 @@ import { TodosComponent } from './components/todos/todos.component';
     AppComponent,
     TodosComponent,
     TodoItemComponent,
+    TodoFilterComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    StoreModule.forRoot(AppReducer),
+    StoreModule.forRoot(AppState),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: false,

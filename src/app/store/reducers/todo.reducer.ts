@@ -1,14 +1,17 @@
-import { addTodoItem, checkTodoItem, removeTodoItem } from '../actions/todo.actions';
+import { addTodoItem, checkTodoItem, filterTodoList, removeTodoItem } from '../actions/todo.actions';
 import { createReducer, on } from '@ngrx/store';
 
 import { ITodoItem } from '../../models/TodoItem';
+import { TodoFilters } from 'src/app/models/TodoFilters';
 
 export interface ITodosState {
   todos: ITodoItem[];
+  filter: TodoFilters;
 }
 
 export const initialState: ITodosState = {
   todos: [],
+  filter: TodoFilters.SHOW_UNCHECKED,
 };
 
 const todosReducerInner = createReducer(initialState,
@@ -35,6 +38,10 @@ const todosReducerInner = createReducer(initialState,
       return item;
     })
   })),
+  on(filterTodoList, (state, { filter }) => ({
+    ...state,
+    filter
+  }))
 );
 
 export function todoReducer(state, action) {

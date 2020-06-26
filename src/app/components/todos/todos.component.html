@@ -8,3 +8,5 @@
   <input type="checkbox" formControlName="checked">
   <button id="addTodoItem" (click)="submitForm()">Add todo item</button>
 </form>
+
+<app-todo-filter [selectedFilter]="todoFilterType$ | async" (currentFilterChange)="handleTodoFilterChange($event)"></app-todo-filter>

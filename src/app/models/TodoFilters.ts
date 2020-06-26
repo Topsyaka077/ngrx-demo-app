@@ -1,0 +1,5 @@
+export enum TodoFilters {
+  SHOW_ALL = 'SHOW_ALL',
+  SHOW_CHECKED = 'SHOW_CHECKED',
+  SHOW_UNCHECKED = 'SHOW_UNCHECKED'
+}

@@ -1,14 +1,42 @@
+import { addTodoItem, checkTodoItem, removeTodoItem } from '../actions/todo.actions';
 import { createReducer, on } from '@ngrx/store';
-import { decrement, increment, reset } from '../actions/todo.actions';
 
-export const initialState = 0;
+import { ITodoItem } from '../../models/TodoItem';
 
-const counterReducerInner = createReducer(initialState,
-  on(increment, state => state + 1),
-  on(decrement, state => state - 1),
-  on(reset, state => 0),
+export interface ITodosState {
+  todos: ITodoItem[];
+}
+
+export const initialState: ITodosState = {
+  todos: [],
+};
+
+const todosReducerInner = createReducer(initialState,
+  on(addTodoItem, (state, { todoItem }) => ({
+    ...state,
+    todos: [...state.todos, {
+      ...todoItem,
+      id: (state.todos.length + 1)
+    }]
+  })),
+  on(removeTodoItem, (state, { id }) => ({
+    ...state,
+    todos: state.todos.filter(item => item.id !== id)
+  })),
+  on(checkTodoItem, (state, { id }) => ({
+    ...state,
+    todos: state.todos.map(item => {
+      if (item.id === id) {
+        return {
+          ...item,
+          checked: !item.checked
+        };
+      }
+      return item;
+    })
+  })),
 );
 
-export function counterReducer(state, action) {
-  return counterReducerInner(state, action);
+export function todoReducer(state, action) {
+  return todosReducerInner(state, action);
 }

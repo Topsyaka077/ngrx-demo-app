@@ -1,0 +1,7 @@
+<p 
+  class="todo-item"
+  [class.checked]="todoItem.checked"
+  (click)="checkTodoItem()">
+  {{todoItem.title}}
+  <span (click)="onRemoveItemClick()">&#10060;</span>
+</p>

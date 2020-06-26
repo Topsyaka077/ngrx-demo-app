@@ -1,21 +1,25 @@
 import { AppComponent } from './app.component';
+import { AppReducer } from './store/reducers/app.reducer';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
-import { CounterComponent } from './components/counter/counter.component';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
-import { counterReducer } from './store/reducers/todo.reducer';
+import { TodoItemComponent } from './components/todo-item/todo-item.component';
+import { TodosComponent } from './components/todos/todos.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CounterComponent,
+    TodosComponent,
+    TodoItemComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot({ count: counterReducer }),
+    ReactiveFormsModule,
+    StoreModule.forRoot(AppReducer),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: false,

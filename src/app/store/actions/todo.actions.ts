@@ -1,5 +1,7 @@
-import { createAction } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
 
-export const increment = createAction('[Counter Component] Increment');
-export const decrement = createAction('[Counter Component] Decrement');
-export const reset = createAction('[Counter Component] Reset');
+import { ITodoItem } from 'src/app/models/TodoItem';
+
+export const addTodoItem = createAction('[Todo Page] Add todo item', props<{ todoItem: ITodoItem }>());
+export const removeTodoItem = createAction('[Todo Page] Remove todo item', props<{id: number}>());
+export const checkTodoItem = createAction('[Todo Page] Check todo item', props<{id: number}>());

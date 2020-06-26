@@ -1,0 +1,10 @@
+
+<ng-container *ngFor="let item of todoItems$ | async">
+  <app-todo-item [todoItem]="item" (eventChecked)="handleCheckTodo($event)" (removeTodoItem)="handleRemoveTodoItem($event)"></app-todo-item>
+</ng-container>
+
+<form [formGroup]="todoFrom">
+  <input type="text" formControlName="title">
+  <input type="checkbox" formControlName="checked">
+  <button id="addTodoItem" (click)="submitForm()">Add todo item</button>
+</form>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
-import { addTodoItem, checkTodoItem, filterTodoList, removeTodoItem } from '../../store/actions/todo.actions';
+import { addTodoItem, checkTodoItem, fetchTodosStarted, filterTodoList, postTodoItemStarted, removeTodoItem } from '../../store/actions/todo.actions';
 import { selectFilteredTodos, selectTodoFilter } from '../../store/selectors/todo.selector';
 
 import { IAppReducer } from '../../store/reducers/app.reducer';
@@ -27,7 +27,7 @@ export class TodosComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log(selectFilteredTodos);
+    this.store.dispatch(fetchTodosStarted());
     this.todoItems$ = this.store.pipe(select(selectFilteredTodos));
     this.todoFilterType$ = this.store.pipe(select(selectTodoFilter));
   }
@@ -51,5 +51,6 @@ export class TodosComponent implements OnInit {
 
   private addTodoItem(todoItem: ITodoItem) {
     this.store.dispatch(addTodoItem({ todoItem }));
+    this.store.dispatch(postTodoItemStarted({ todoItem }));
   }
 }

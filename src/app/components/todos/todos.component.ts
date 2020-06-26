@@ -1,7 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
-import { addTodoItem, checkTodoItem, fetchTodosStarted, filterTodoList, postTodoItemStarted, removeTodoItem } from '../../store/actions/todo.actions';
+import {
+  addTodoItem,
+  checkTodoItem,
+  fetchTodosStarted,
+  filterTodoList,
+  postTodoItemStarted,
+  removeTodoItem
+} from '../../store/actions/todo.actions';
 import { selectFilteredTodos, selectTodoFilter } from '../../store/selectors/todo.selector';
 
 import { IAppReducer } from '../../store/reducers/app.reducer';
